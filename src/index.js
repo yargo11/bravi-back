@@ -7,7 +7,28 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const listaDeContatos = [];
+const listaDeContatos = [
+  {
+    id: "13579",
+    name: "Yargo",
+    contatos: [
+      {
+        redeNome: "Facebook",
+        link: "http://facebook.com",
+      },
+    ],
+  },
+  {
+    id: "2468",
+    name: "Tomtom",
+    contatos: [
+      {
+        redeNome: "Facebook",
+        link: "http://facebook.com",
+      },
+    ],
+  },
+];
 
 function logRequests(request, response, next) {
   const { method, url } = request;
@@ -22,11 +43,11 @@ function logRequests(request, response, next) {
 app.use(logRequests);
 
 app.get("/contatos", (request, response) => {
-  const { name } = request.query;
+  const { id } = request.query;
 
-  const results = name
+  const results = id
     ? listaDeContatos.filter((listaDeContatos) =>
-        listaDeContatos.name.includes(name)
+        listaDeContatos.id.includes(id)
       )
     : listaDeContatos;
 
